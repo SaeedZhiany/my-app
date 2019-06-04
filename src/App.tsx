@@ -10,81 +10,80 @@ const App: React.FC = () => {
         highcharts={Highcharts}
         key={"gauge chart by HC"}
         options={{
-          title: {
-            text: "Solar Employment Growth by Sector, 2010-2016"
-          },
 
           chart: {
-            type: 'line',
+            type: 'solidgauge'
           },
 
-          subtitle: {
-            text: "Source: thesolarfoundation.com"
-          },
+          title: null,
 
-          yAxis: {
-            title: {
-              text: "Number of Employees"
+          pane: {
+            center: ['50%', '85%'],
+            size: '140%',
+            startAngle: -90,
+            endAngle: 90,
+            background: {
+              // @ts-ignore
+              // backgroundColor: '#EEE',
+              innerRadius: '60%',
+              outerRadius: '100%',
+              shape: 'arc'
             }
           },
-          legend: {
-            layout: "vertical" as "vertical",
-            align: "right" as "right",
-            verticalAlign: "middle" as "middle",
+
+          tooltip: {
+            enabled: false
           },
+
+          // the value axis
+          yAxis: {
+            min: 0,
+            max: 200,
+            stops: [
+              [0.1, '#55BF3B'], // green
+              [0.5, '#DDDF0D'], // yellow
+              [0.9, '#DF5353'] // red
+            ],
+            lineWidth: 0,
+            minorTickInterval: null,
+            tickAmount: 2,
+            title: {
+              y: -70,
+              text: 'Speed'
+            },
+            labels: {
+              y: 16
+            }
+          },
+
+          credits: {
+            enabled: false
+          },
+
+          series: [{
+            name: 'Speed',
+            data: [80],
+            dataLabels: {
+              format: `
+              <div style="text-align:center">
+                <span style="font-size:25px;color:black;">{y}</span><br/>
+                <span style="font-size:12px;color:silver">km/h</span>
+              </div>
+              `,
+            },
+            tooltip: {
+              valueSuffix: ' km/h'
+            }
+          }],
 
           plotOptions: {
-            series: {
-              label: {
-                connectorAllowed: false
-              },
-              pointStart: 2010
-            }
-          },
-
-          series: [
-            {
-              type: 'line',
-              name: "Installation",
-              data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-            },
-            {
-              type: 'line',
-              name: "Manufacturing",
-              data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
-            },
-            {
-              type: 'line',
-              name: "Sales & Distribution",
-              data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
-            },
-            {
-              type: 'line',
-              name: "Project Development",
-              data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
-            },
-            {
-              type: 'line',
-              name: "Other",
-              data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
-            }
-          ],
-
-          responsive: {
-            rules: [
-              {
-                condition: {
-                  maxWidth: 500
-                },
-                chartOptions: {
-                  legend: {
-                    layout: "horizontal" as "horizontal",
-                    align: "center" as "center",
-                    verticalAlign: "bottom" as "bottom",
-                  }
-                }
+            solidgauge: {
+              dataLabels: {
+                y: 5,
+                borderWidth: 0,
+                useHTML: true
               }
-            ]
+            }
           }
         }}
       />
