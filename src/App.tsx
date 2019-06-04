@@ -1,15 +1,21 @@
 import React from 'react';
 import './App.css';
+import * as Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <HighchartsReact
+        highcharts={Highcharts}
         key={"gauge chart by HC"}
         options={{
           title: {
             text: "Solar Employment Growth by Sector, 2010-2016"
+          },
+
+          chart: {
+            type: 'line',
           },
 
           subtitle: {
@@ -84,6 +90,6 @@ const App: React.FC = () => {
       />
     </div>
   );
-}
+};
 
 export default App;
